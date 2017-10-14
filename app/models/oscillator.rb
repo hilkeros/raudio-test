@@ -1,4 +1,4 @@
-class Oscillator
+class Oscillator < Audio
 
 	attr_accessor :scripts, :frequency, :volume
 
@@ -14,20 +14,5 @@ class Oscillator
   def identifier
   	"osc_" + object_id.to_s
   end
-
-	def render
-		("<script id='ToneCode'>" + scripts.join("\n") +	"</script>").html_safe
-  end
-
-
-
-  def to_master
-  	@scripts << "#{identifier}.toMaster();"
-  end
-
-  def start
-  	@scripts << "#{identifier}.start();"
-  end
-
 
 end
