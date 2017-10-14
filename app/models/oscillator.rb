@@ -5,7 +5,7 @@ class Oscillator
 	def initialize(frequency: 440, volume: 0)
     @frequency = frequency
     @volume = volume
-    @scripts = ["var #{self.identifier} = new Tone.Oscillator({
+    @scripts = ["var #{identifier} = new Tone.Oscillator({
       		'frequency' : #{@frequency},
       		'volume' : #{@volume}
     		});"]
@@ -16,19 +16,17 @@ class Oscillator
   end
 
 	def render
-		("<script id='ToneCode'>" + self.scripts.join("\n") +	"</script>").html_safe
+		("<script id='ToneCode'>" + scripts.join("\n") +	"</script>").html_safe
   end
 
 
 
   def to_master
-  	script = "#{self.identifier}.toMaster();"
-  	@scripts << script
+  	@scripts << "#{identifier}.toMaster();"
   end
 
   def start
-  	script = "#{self.identifier}.start();"
-  	@scripts << script
+  	@scripts << "#{identifier}.start();"
   end
 
 
