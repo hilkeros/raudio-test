@@ -2,12 +2,19 @@ class Oscillator < Audio
 
 	attr_accessor :scripts, :frequency, :volume
 
-	def initialize(frequency: 440, volume: 0)
+	def initialize(type: 'sine', frequency: 440, detune: 0, phase: 0, volume: 0)
+    @type = type #sine, triangle, sawtooth, square, custom
     @frequency = frequency
+    @detune = detune
+    @phase = phase
     @volume = volume
+
     @scripts = ["var #{identifier} = new Tone.Oscillator({
-      		'frequency' : #{@frequency},
-      		'volume' : #{@volume}
+      		'type': 	 			'#{@type}',
+      		'frequency' : 	#{@frequency},
+      		'detune' : 			#{@detune},
+      		'phase' : 			#{@phase},
+      		'volume' : 			#{@volume}
     		});"]
   end
 

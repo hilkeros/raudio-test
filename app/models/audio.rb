@@ -9,6 +9,10 @@ class Audio
   	@scripts << "#{identifier}.start();"
   end
 
+  def triggerAttackRelease(note, length)
+  	@scripts << "#{identifier}.triggerAttackRelease('#{note}', '#{length}');"
+  end
+
   def render(*nodes)
   	script = []
   	nodes.each do |node|
