@@ -9,8 +9,16 @@ class Audio
   	@scripts << "#{identifier}.start();"
   end
 
-  def triggerAttackRelease(note, length)
-  	@scripts << "#{identifier}.triggerAttackRelease('#{note}', '#{length}');"
+  def trigger_attack(*args)
+  	to_string = args.map{|arg| "'" + arg.to_s + "'"}.join(",")
+  	script = "#{identifier}.triggerAttack(#{to_string});"
+  	@scripts << script
+  	return script
+  end
+
+  def trigger_attack_release(*args)
+  	to_string = args.map{|arg| "'" + arg.to_s + "'"}.join(",")
+  	@scripts << "#{identifier}.triggerAttackRelease(#{to_string});"
   end
 
   def render(*nodes)

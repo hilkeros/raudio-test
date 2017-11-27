@@ -1,6 +1,6 @@
 class Oscillator < Audio
 
-	attr_accessor :scripts, :frequency, :volume
+	attr_accessor :type, :frequency, :detune, :phase, :volume, :scripts
 
 	def initialize(type: 'sine', frequency: 440, detune: 0, phase: 0, volume: 0)
     @type = type #sine, triangle, sawtooth, square, custom

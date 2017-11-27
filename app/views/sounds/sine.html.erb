@@ -1,3 +1,34 @@
 <h1>Sounds#sine</h1>
 <p>Find me in app/views/sounds/sine.html.erb</p>
-<%= @raudio %>
+<%#= @raudio %>
+
+<div id='content'>
+  <input type='checkbox' class='playToggle'>
+</div>
+
+<script>
+  var synth = new Tone.MonoSynth().toMaster()
+  var synth2 = new Tone.MonoSynth().toMaster()
+
+//create a loop
+var loop = new Tone.Loop(function(time){
+  synth.triggerAttackRelease("C3", "8n", time)
+}, "2n")
+
+var loop2 = new Tone.Loop(function(time){
+  synth2.triggerAttackRelease("G4", "32n", time)
+}, "8t")
+
+//play the loop between 0-2m on the transport
+loop.start(0)
+loop2.start(0)
+
+document.querySelector('.playToggle').addEventListener('change', function(e){
+  if (e.target.checked){
+    Tone.Transport.start('+0.1')
+  } else {
+    Tone.Transport.stop()
+  }
+})
+</script>
+
