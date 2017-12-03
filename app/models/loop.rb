@@ -6,7 +6,7 @@ class Loop < Audio
 		@interval = interval
 
 		@scripts = ["var #{identifier} = new Tone.Loop(function(time){
-							#{@event.last}}, '#{@interval}')
+							#{@event}}, '#{@interval}')
 				"]
 	end
 

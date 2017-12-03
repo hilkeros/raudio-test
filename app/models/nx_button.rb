@@ -7,7 +7,7 @@ class NxButton < Nexus
 		@scripts = ["#{identifier}.on('*',function(data) {
             if(data.press==1){
               console.log(data);
-              #{event};
+              #{@event}
             }
           })"
 

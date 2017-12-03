@@ -6,7 +6,13 @@ class Audio
   end
 
   def start
-  	@scripts << "#{identifier}.start();"
+  	script = "#{identifier}.start();
+  	Tone.Transport.start('+0.1')"
+  end
+
+  def stop
+  	script = "#{identifier}.stop();
+  	Tone.Transport.stop();"
   end
 
   def trigger_attack(*args)
@@ -18,7 +24,9 @@ class Audio
 
   def trigger_attack_release(*args)
   	to_string = args.map{|arg| "'" + arg.to_s + "'"}.join(",")
-  	@scripts << "#{identifier}.triggerAttackRelease(#{to_string});"
+  	script = "#{identifier}.triggerAttackRelease(#{to_string});"
+  	#@scripts << script
+  	return script
   end
 
   def render(*nodes)
