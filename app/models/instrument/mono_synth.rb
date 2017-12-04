@@ -17,12 +17,12 @@ class MonoSynth < Audio
 			sustain: 0.9,
 			release: 1
 		},
-		filter_envelope: {
+		filterEnvelope: {
 			attack: 0.06,
 			decay: 0.2,
 			sustain: 0.5,
 			release: 2,
-			base_frequency: 200,
+			baseFrequency: 200,
 			octaves: 7,
 			exponent: 2
 		}
@@ -32,7 +32,7 @@ class MonoSynth < Audio
 		@oscillator = oscillator
 		@filter = filter
 		@envelope = envelope
-		@filter_envelope = filter_envelope
+		@filterEnvelope = filterEnvelope
 
     @scripts = ["var #{identifier} = new Tone.MonoSynth({
     			'frequency': 		'#{@frequency}',
@@ -50,14 +50,14 @@ class MonoSynth < Audio
         									'release': '#{@envelope[:release]}'
         									},
 					'filterEnvelope': {
-													'attack': '#{@filter_envelope[:attack]}',
-													'decay': '#{@filter_envelope[:decay]}',
-													'sustain': '#{@filter_envelope[:sustain]}',
-													'release': '#{@filter_envelope[:release]}',
-													'decay': '#{@filter_envelope[:decay]}',
-													'baseFrequency': '#{@filter_envelope[:base_frequency]}',
-													'octaves': '#{@filter_envelope[:octaves]}',
-													'exponent': '#{@filter_envelope[:exponent]}'
+													'attack': '#{@filterEnvelope[:attack]}',
+													'decay': '#{@filterEnvelope[:decay]}',
+													'sustain': '#{@filterEnvelope[:sustain]}',
+													'release': '#{@filterEnvelope[:release]}',
+													'decay': '#{@filterEnvelope[:decay]}',
+													'baseFrequency': '#{@filterEnvelope[:baseFrequency]}',
+													'octaves': '#{@filterEnvelope[:octaves]}',
+													'exponent': '#{@filterEnvelope[:exponent]}'
 												}
     		});"]
   end

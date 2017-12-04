@@ -1,5 +1,5 @@
 class FeedbackDelay < Audio
-	attr_accessor :delay_time, :feedback, :scripts
+	attr_accessor :delayTime, :feedback, :scripts
 
 	def initialize(delayTime = 0.25, feedback)
 		@delayTime = delayTime
