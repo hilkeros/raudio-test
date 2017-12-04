@@ -1,15 +1,15 @@
 class NxButton < Nexus
 
-	attr_accessor :event, :scripts
+	attr_accessor :scripts
 
-	def initialize(event: 'console')
-		@event = event
-		@scripts = ["#{identifier}.('*',function(data) {
+	def initialize(*events)
+		@scripts = ["#{identifier}.on('*',function(data) {
             if(data.press==1){
               console.log(data);
-              #{event};
+              #{events.join(';')}
             }
-          }) "
+          })"
+
 		]
 	end
 
