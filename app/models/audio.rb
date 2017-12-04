@@ -5,6 +5,10 @@ class Audio
   	@scripts << "#{identifier}.toMaster();"
   end
 
+  def connect(destination)
+  	@scripts << "#{identifier}.connect(#{destination.identifier});"
+  end
+
   def start
   	script = "#{identifier}.start();
   	Tone.Transport.start('+0.1')"

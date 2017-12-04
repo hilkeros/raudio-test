@@ -34,13 +34,15 @@ class SoundsController < ApplicationController
   		'D1': '/samples/lex/snare.wav',
   		'E1': '/samples/lex/gick.wav'
   		)
-  	@sampler.to_master
+  	@delay = FeedbackDelay.new('8n', 0.5)
+  	@sampler.connect(@delay)
+  	@delay.to_master
   	@clap_loop = Loop.new(@sampler.trigger_attack('C1', '4n'), '2n')
   	@snare_loop = Loop.new(@sampler.trigger_attack('D1'), '8n')
   	@button1 = NxButton.new(@clap_loop.start)
   	@button2 = NxButton.new(@snare_loop.start)
   	@button3 = NxButton.new(@clap_loop.stop, @snare_loop.stop)
-  	@raudio = Audio.new.render(@sampler, @clap_loop, @snare_loop)
+  	@raudio = Audio.new.render(@delay, @sampler, @clap_loop, @snare_loop)
   	@nexus = Nexus.new.render(@button1, @button2, @button3)
   end
 end
