@@ -39,10 +39,15 @@ class SoundsController < ApplicationController
   	@delay.to_master
   	@clap_loop = Loop.new(@sampler.trigger_attack('C1', '4n'), '2n')
   	@snare_loop = Loop.new(@sampler.trigger_attack('D1'), '8n')
+
   	@button1 = NxButton.new(@clap_loop.start)
   	@button2 = NxButton.new(@snare_loop.start)
   	@button3 = NxButton.new(@clap_loop.stop, @snare_loop.stop)
+  	@dial1 = NxDial.new(@delay, 'delayTime')
+  	@dial2 = NxDial.new(@delay, 'feedback')
+  	@dial3 = NxDial.new(@delay, 'wet')
+
   	@raudio = Audio.new.render(@delay, @sampler, @clap_loop, @snare_loop)
-  	@nexus = Nexus.new.render(@button1, @button2, @button3)
+  	@nexus = Nexus.new.render(@button1, @button2, @button3, @dial1, @dial2, @dial3)
   end
 end
