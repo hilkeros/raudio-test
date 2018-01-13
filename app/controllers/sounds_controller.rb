@@ -50,4 +50,11 @@ class SoundsController < ApplicationController
   	@raudio = Audio.new.render(@delay, @sampler, @clap_loop, @snare_loop)
   	@nexus = Nexus.new.render(@button1, @button2, @button3, @dial1, @dial2, @dial3)
   end
+
+  def midi
+  	@synth = MonoSynth.new
+  	@synth.to_master
+  	@raudio = Audio.new.render(@synth)
+  	@midi = Midi.new(@synth).script;
+  end
 end
