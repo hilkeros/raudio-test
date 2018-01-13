@@ -8,6 +8,8 @@ class Midi
 		@script = ("<script id='MidiCode'>
 								window.onload = function()
 		  {
+		    var midi_converter = " + self.midi_converter_array.to_s +
+		    ";
 		    if (navigator.requestMIDIAccess) {
 		          console.log('Browser supports MIDI!');
 		        }
@@ -24,7 +26,6 @@ class Midi
 		      for (var input = inputs.next();
 		        input && !input.done;
 		        input = inputs.next()) {
-		        //call the midi message
 		        input.value.onmidimessage = onMIDIMessage;
 		        function onMIDIMessage (message) {
 		          console.log(message.data);
@@ -45,14 +46,30 @@ class Midi
 
 		    function playNote(note) {" + @instrument +
 
-	    	".triggerAttack(note);
+	    	".triggerAttack(midi_converter[note]);
 					}
 
   			function stopNote(note) {" + @instrument +
 
 				".triggerRelease();
 			}
-				}</script>").html_safe
+		}</script>").html_safe
 
+	end
+
+	def midi_note_to_note_name(note)
+		midi_converter_array[note]
+	end
+
+
+	def midi_converter_array
+		array = []
+		note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+		10.times do |i|
+			note_names.each do |n|
+				array.push( n + (i-2).to_s)
+			end
+		end
+		return array
 	end
 end
