@@ -1,24 +1,17 @@
-# README
+# RAUDIO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a preliminary project to write a Ruby Gem for [Web Audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
 
-Things you may want to cover:
+It is kind of a Ruby wrapper around the [Tone.js Framework](https://tonejs.github.io/).
 
-* Ruby version
+Tone.js is a framework to speed up working with the Web Audio API. In their own words: Tone.js is a framework for creating interactive music in the browser. It provides advanced scheduling capabilities, synths and effects, and intuitive musical abstractions built on top of the Web Audio API.
 
-* System dependencies
+Basically I translate the framework into Ruby syntax and into abstractions that I find easier to use as a musician/coder.
 
-* Configuration
+There are a couple of classes of instruments, effects, etc. to build up your 'Audio Graph'. Once your graph is built, you create a instance of the general (R)Audio class and call 'render'. Next you have to put the (R)Audio instance into your view and the system generates all the javascript from the Tone.js framework for you.
 
-* Database creation
+I also use some elements from the [Nexus UI](https://nexus-js.github.io/ui/) library and some Web Midi, which technically fall out of the scope of Web Audio and Tone.js
 
-* Database initialization
+Take a look into the sounds controller to play around.
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

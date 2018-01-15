@@ -52,7 +52,7 @@ class SoundsController < ApplicationController
   end
 
   def midi
-  	@synth = MonoSynth.new
+  	@synth = AMSynth.new
   	@synth.to_master
   	@raudio = Audio.new.render(@synth)
   	@midi = Midi.new(@synth).script;
