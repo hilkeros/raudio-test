@@ -57,4 +57,16 @@ class SoundsController < ApplicationController
   	@raudio = Audio.new.render(@synth)
   	@midi = Midi.new(@synth).script;
   end
+
+  def ableton
+    @synth = AMSynth.new
+    @synth.to_master
+    a = Ableton.new
+    @part = Part.new(@synth, a.events_array)
+    @start_button = NxButton.new(@part.start)
+    @stop_button = NxButton.new(@part.stop)
+    @raudio = Audio.new.render(@synth, @part)
+    @nexus = Nexus.new.render(@start_button, @stop_button)
+
+  end
 end

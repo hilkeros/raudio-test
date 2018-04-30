@@ -15,7 +15,7 @@ class Audio
   end
 
   def stop
-  	script = "#{identifier}.stop();
+  	script = "
   	Tone.Transport.stop();"
   end
 
