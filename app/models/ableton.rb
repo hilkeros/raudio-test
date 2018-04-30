@@ -1,11 +1,21 @@
 class Ableton
 
+	attr_accessor :file
+
+	def initialize(file = "basic-midi-clip.xml" )
+		@file = file
+	end
+
 	def path
-		Rails.root.join("public/ableton/basic-midi-clip.xml")
+		Rails.root.join("public/ableton/#{file}")
 	end
 
 	def xml
 		Nokogiri::XML(File.open(path))
+	end
+
+	def loop_end
+		( xml.xpath('//LoopEnd').first['Value'].to_i / 4).to_s + 'm'
 	end
 
 	def keys
@@ -34,11 +44,6 @@ class Ableton
 		end
 		return array
 	end
-
-	def events_string
-		events_array.map{|event| ("{" + event.map{|key, value| (key.to_s + ": " + value).join(", ")} + "}").join(", ")  }
-	end
-
 	
 	def midi_note_to_note_name(note)
 		midi_converter_array[note.to_i]

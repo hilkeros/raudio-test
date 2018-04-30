@@ -61,8 +61,8 @@ class SoundsController < ApplicationController
   def ableton
     @synth = AMSynth.new
     @synth.to_master
-    a = Ableton.new
-    @part = Part.new(@synth, a.events_array)
+    a = Ableton.new('longer-loop.xml')
+    @part = Part.new(@synth, a.events_array, true, a.loop_end)
     @start_button = NxButton.new(@part.start)
     @stop_button = NxButton.new(@part.stop)
     @raudio = Audio.new.render(@synth, @part)
