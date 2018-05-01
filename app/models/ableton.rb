@@ -38,8 +38,8 @@ class Ableton
 			events = key.css('MidiNoteEvent')
 			events.each do |event|
 				time = event['Time']
-				duration = event['Duration']
-				array.push({ time: time.to_s + ' * 4n', note: note_name, duration: '16n' })
+				duration = duration_converter(event['Duration'])
+				array.push({ time: time.to_s + ' * 4n', note: note_name, duration: duration })
 			end
 		end
 		return array
@@ -47,6 +47,15 @@ class Ableton
 	
 	def midi_note_to_note_name(note)
 		midi_converter_array[note.to_i]
+	end
+
+	#converts the Ableton xml durations to Tone.js notation with n and m
+	def duration_converter(ableton_value)
+		if ableton_value.to_f < 4
+			((1/ableton_value.to_f) * 4).to_i.to_s + 'n'
+		else
+			(ableton_value.to_f/4).to_i.to_s + 'm'
+		end
 	end
 
 
