@@ -69,9 +69,9 @@ class SoundsController < ApplicationController
     @sampler.to_master
     a = Ableton.new('two-tracks.xml')
     @track_1 = AbletonTrack.new(a.midi_tracks.first)
-    @part_1 = Part.new(@synth, @track_1.events_array, true, @track_1.loop_end(@track_1.track_xml))
+    @part_1 = Part.new(@synth, @track_1.events_array, true, @track_1.loop_end)
     @track_2 = AbletonTrack.new(a.midi_tracks.last)
-    @part_2 = Part.new(@sampler, @track_2.events_array, true, @track_2.loop_end(@track_2.track_xml))
+    @part_2 = Part.new(@sampler, @track_2.events_array, true, @track_2.loop_end)
     @start_1_button = NxButton.new(@part_1.start)
     @start_2_button = NxButton.new(@part_2.start)
     @stop_1_button = NxButton.new(@part_1.stop)

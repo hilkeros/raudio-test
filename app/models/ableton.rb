@@ -14,10 +14,6 @@ class Ableton
 		Nokogiri::XML(File.open(path))
 	end
 
-	def loop_end(xml = self.xml)
-		( xml.xpath('//LoopEnd').first['Value'].to_i / 4).to_s + 'm'
-	end
-
 	def midi_tracks
 		xml.xpath("//Tracks//MidiTrack")
 	end
