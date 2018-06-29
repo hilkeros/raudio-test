@@ -1,19 +1,23 @@
-class AbletonTrack < Ableton
+class Ableton::AbletonTrack < Ableton
 
 	def initialize(track_xml)
 		@track_xml = track_xml
 	end
 
 	def track_xml
-		track_xml
+		@track_xml
 	end
 
-	def keys
-		@track_xml.css('KeyTrack')
+	def clip_slots
+		slots = []
+		xml_slots = @track_xml.css('ClipSlot ClipSlot MidiClip')
+		xml_slots.each do |xml|
+			slots.push(Ableton::AbletonClip.new(xml))
+		end
+		return slots
 	end
 
-	def loop_end
-		(@track_xml.css('LoopEnd').first['Value'].to_i / 4).to_s + 'm'
-	end
+	
+
 
 end

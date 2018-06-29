@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'sounds/beat_loop'
   get 'sounds/midi'
   get 'sounds/ableton'
+  get 'sounds/ableton_session'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -15,7 +15,12 @@ class Ableton
 	end
 
 	def midi_tracks
-		xml.xpath("//Tracks//MidiTrack")
+		tracks = []
+		xml_tracks = xml.css('MidiTrack')
+		xml_tracks.each do |xml|
+			tracks.push(Ableton::AbletonTrack.new(xml))
+		end
+		return tracks
 	end
 
 	def keys
@@ -30,20 +35,6 @@ class Ableton
 		xml.xpath('//MidiNoteEvent')
 	end
 
-	def events_array(keys = self.keys)
-		array = []
-		keys.each do |key|
-			note = key.css('MidiKey').first['Value']
-			note_name = midi_note_to_note_name(note)
-			events = key.css('MidiNoteEvent')
-			events.each do |event|
-				time = event['Time']
-				duration = duration_converter(event['Duration'])
-				array.push({ time: time.to_s + ' * 4n', note: note_name, duration: duration })
-			end
-		end
-		return array
-	end
 	
 	def midi_note_to_note_name(note)
 		midi_converter_array[note.to_i]

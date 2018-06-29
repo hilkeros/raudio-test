@@ -80,4 +80,26 @@ class SoundsController < ApplicationController
     @nexus = Nexus.new.render(@start_1_button, @stop_1_button, @start_2_button, @stop_2_button)
 
   end
+
+  def ableton_session
+    @synth = AMSynth.new
+    @sampler = Sampler.new(
+      'C1': '/samples/lex/clap.wav',
+      'D1': '/samples/lex/snare.wav',
+      'C#1': '/samples/lex/gick.wav'
+      )
+    @synth.to_master
+    @sampler.to_master
+    a = Ableton.new('more-clips.xml')
+    clip_1 = a.midi_tracks.first.clip_slots.last
+    @part_1 = Part.new(@synth, clip_1.events, true, clip_1.loop_end)
+    clip_2 = a.midi_tracks.last.clip_slots.last
+    @part_2 = Part.new(@sampler, clip_2.events, true, clip_2.loop_end)
+    @start_1_button = NxButton.new(@part_1.start)
+    @start_2_button = NxButton.new(@part_2.start)
+    @stop_1_button = NxButton.new(@part_1.stop)
+    @stop_2_button = NxButton.new(@part_2.stop)
+    @raudio = Audio.new.render(@synth, @sampler, @part_1, @part_2)
+    @nexus = Nexus.new.render(@start_1_button, @stop_1_button, @start_2_button, @stop_2_button)
+  end
 end
