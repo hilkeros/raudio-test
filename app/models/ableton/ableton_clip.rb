@@ -31,4 +31,8 @@ class Ableton::AbletonClip < Ableton
 		return array
 	end
 
+	def build_part(instrument)
+		Part.new(instrument, events, true, loop_end)
+	end
+
 end

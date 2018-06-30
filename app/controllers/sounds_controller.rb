@@ -67,15 +67,18 @@ class SoundsController < ApplicationController
       )
     @synth.to_master
     @sampler.to_master
+
     a = Ableton.new('two-tracks.xml')
-    @track_1 = AbletonTrack.new(a.midi_tracks.first)
-    @part_1 = Part.new(@synth, @track_1.events_array, true, @track_1.loop_end)
-    @track_2 = AbletonTrack.new(a.midi_tracks.last)
-    @part_2 = Part.new(@sampler, @track_2.events_array, true, @track_2.loop_end)
+    clip_1 = a.midi_tracks.first.clip_slots.first
+    @part_1 = clip_1.build_part(@synth)
+    clip_2 = a.midi_tracks.last.clip_slots.first
+    @part_2 = clip_2.build_part(@sampler)
+
     @start_1_button = NxButton.new(@part_1.start)
     @start_2_button = NxButton.new(@part_2.start)
     @stop_1_button = NxButton.new(@part_1.stop)
     @stop_2_button = NxButton.new(@part_2.stop)
+
     @raudio = Audio.new.render(@synth, @sampler, @part_1, @part_2)
     @nexus = Nexus.new.render(@start_1_button, @stop_1_button, @start_2_button, @stop_2_button)
 
@@ -91,15 +94,29 @@ class SoundsController < ApplicationController
     @synth.to_master
     @sampler.to_master
     a = Ableton.new('more-clips.xml')
-    clip_1 = a.midi_tracks.first.clip_slots.last
-    @part_1 = Part.new(@synth, clip_1.events, true, clip_1.loop_end)
-    clip_2 = a.midi_tracks.last.clip_slots.last
-    @part_2 = Part.new(@sampler, clip_2.events, true, clip_2.loop_end)
-    @start_1_button = NxButton.new(@part_1.start)
-    @start_2_button = NxButton.new(@part_2.start)
-    @stop_1_button = NxButton.new(@part_1.stop)
-    @stop_2_button = NxButton.new(@part_2.stop)
-    @raudio = Audio.new.render(@synth, @sampler, @part_1, @part_2)
-    @nexus = Nexus.new.render(@start_1_button, @stop_1_button, @start_2_button, @stop_2_button)
+
+    t_1_clip_1 = a.midi_tracks.first.clip_slots[0]
+    t_1_clip_2 = a.midi_tracks.first.clip_slots[1]
+    @part_1_1 = t_1_clip_1.build_part(@synth)
+    @part_1_2 = t_1_clip_2.build_part(@synth)
+
+    t_2_clip_1 = a.midi_tracks.last.clip_slots[0]
+    t_2_clip_2 = a.midi_tracks.last.clip_slots[1]
+    t_2_clip_3 = a.midi_tracks.last.clip_slots[2]
+    @part_2_1 = t_2_clip_1.build_part(@sampler)
+    @part_2_2 = t_2_clip_2.build_part(@sampler)
+    @part_2_3 = t_2_clip_2.build_part(@sampler)
+
+    
+    @raudio = Audio.new.render(@synth, @sampler, @part_1_1, @part_1_2, @part_2_1, @part_2_2, @part_2_3)
+    @nexus = Nexus.new.render(
+      @start_track_1_clip_1 = NxButton.new(@part_1_1.start),
+      @start_track_1_clip_2 = NxButton.new(@part_1_2.start),
+      @start_track_2_clip_1 = NxButton.new(@part_2_1.start),
+      @start_track_2_clip_2 = NxButton.new(@part_2_2.start),
+      @start_track_2_clip_3 = NxButton.new(@part_2_3.start),
+      @stop_track_1 = NxButton.new(@part_1_1.stop_all),
+      @stop_track_2 = NxButton.new(@part_2_1.stop_all)
+    )
   end
 end
