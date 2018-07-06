@@ -74,8 +74,8 @@ class SoundsController < ApplicationController
     clip_2 = a.midi_tracks.last.clip_slots.first
     @part_2 = clip_2.build_part(@sampler)
 
-    @start_1_button = NxButton.new(@part_1.start)
-    @start_2_button = NxButton.new(@part_2.start)
+    @start_1_button = NxButton.new(@part_1.start('@1m'))
+    @start_2_button = NxButton.new(@part_2.start('@1m'))
     @stop_1_button = NxButton.new(@part_1.stop)
     @stop_2_button = NxButton.new(@part_2.stop)
 

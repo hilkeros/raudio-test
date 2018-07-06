@@ -9,9 +9,12 @@ class Audio
   	@scripts << "#{identifier}.connect(#{destination.identifier});"
   end
 
-  def start
-  	script = "#{identifier}.start();
-  	Tone.Transport.start('+0.1')"
+  def start(offset = nil )
+  	if offset.blank?
+      script = "#{identifier}.start();"
+    else
+       script = "#{identifier}.start('#{offset}');"
+    end
   end
 
   def stop
@@ -38,7 +41,7 @@ class Audio
   end
 
   def render(*nodes)
-  	script = []
+  	script = ["Tone.Transport.start();"]
   	nodes.each do |node|
   		script << node.scripts
   	end
