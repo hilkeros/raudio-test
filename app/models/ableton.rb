@@ -23,18 +23,17 @@ class Ableton
 		return tracks
 	end
 
-	def keys
-		xml.xpath("//Notes//KeyTrack")
+	def build_session
+		this_session = {}
+		midi_tracks.each_with_index do |track, index|
+			track_array = []
+			track.clip_slots.each do |slot|
+				track_array.push(slot)
+			end
+			this_session['track_' + (index + 1).to_s] = track_array
+		end
+		return this_session
 	end
-
-	def midi_note
-		xml.xpath('//MidiKey').first['Value']
-	end
-
-	def midi_events
-		xml.xpath('//MidiNoteEvent')
-	end
-
 	
 	def midi_note_to_note_name(note)
 		midi_converter_array[note.to_i]
