@@ -16,6 +16,11 @@ class Part < Audio
 				"]
 	end
 
+	
+	 def start_in_session(partslist)
+    script = "start_in_session(#{self.identifier}, #{partslist.identifier})"
+  end
+
 	def identifier
 		"part_" + object_id.to_s
 	end

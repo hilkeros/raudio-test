@@ -103,30 +103,24 @@ class SoundsController < ApplicationController
       parts.push(part)
       track_1.push(part)
     end
+    partslist_1 = Ableton::PartsList.new(track_1)
     track_2 = []
     s['track_2'].each do |slot|
       part = slot.build_part(@sampler)
       parts.push(part)
       track_2.push(part)
     end
-    @raudio = Audio.new.render(@synth, @sampler, *parts )
+    partslist_2 = Ableton::PartsList.new(track_2)
+    @raudio = Audio.new.render(@synth, @sampler, *parts, partslist_1, partslist_2)
 
-    # t_1_clip_1 = a.midi_tracks.first.clip_slots[0]
-    # t_1_clip_2 = a.midi_tracks.first.clip_slots[1]
-    # @part_1_1 = t_1_clip_1.build_part(@synth)
-    # @part_1_2 = t_1_clip_2.build_part(@synth)
 
-    # t_2_clip_1 = a.midi_tracks.last.clip_slots[0]
-    # t_2_clip_2 = a.midi_tracks.last.clip_slots[1]
-    # t_2_clip_3 = a.midi_tracks.last.clip_slots[2]
-    # @part_2_1 = t_2_clip_1.build_part(@sampler)
-    # @part_2_2 = t_2_clip_2.build_part(@sampler)
-    # @part_2_3 = t_2_clip_2.build_part(@sampler)
-
-    
-    # @raudio = Audio.new.render(@synth, @sampler, @part_1_1, @part_1_2, @part_2_1, @part_2_2, @part_2_3)
-    # @nexus = Nexus.new.render(
-    #   @start_track_1_clip_1 = NxButton.new(@part_1_1.start),
+    @nexus = Nexus.new.render(
+        @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(partslist_1)),
+        @start_track_1_clip_2 = NxButton.new(parts[1].start_in_session(partslist_1)),
+        @start_track_2_clip_1 = NxButton.new(parts[2].start_in_session(partslist_2)),
+        @start_track_2_clip_2 = NxButton.new(parts[3].start_in_session(partslist_2)),
+        @start_track_2_clip_3 = NxButton.new(parts[4].start_in_session(partslist_2))
+        )
     #   @start_track_1_clip_2 = NxButton.new(@part_1_2.start),
     #   @start_track_2_clip_1 = NxButton.new(@part_2_1.start),
     #   @start_track_2_clip_2 = NxButton.new(@part_2_2.start),

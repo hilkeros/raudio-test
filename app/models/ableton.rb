@@ -34,7 +34,7 @@ class Ableton
 		end
 		return this_session
 	end
-	
+
 	def midi_note_to_note_name(note)
 		midi_converter_array[note.to_i]
 	end
