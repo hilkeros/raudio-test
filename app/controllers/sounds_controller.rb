@@ -97,11 +97,17 @@ class SoundsController < ApplicationController
 
     s = a.build_session
     parts = []
+    track_1 = []
     s['track_1'].each do |slot|
-      parts.push(slot.build_part(@synth))
+      part = slot.build_part(@synth)
+      parts.push(part)
+      track_1.push(part)
     end
+    track_2 = []
     s['track_2'].each do |slot|
-      parts.push(slot.build_part(@sampler))
+      part = slot.build_part(@sampler)
+      parts.push(part)
+      track_2.push(part)
     end
     @raudio = Audio.new.render(@synth, @sampler, *parts )
 
@@ -128,5 +134,8 @@ class SoundsController < ApplicationController
     #   @stop_track_1 = NxButton.new(@part_1_1.stop_all),
     #   @stop_track_2 = NxButton.new(@part_2_1.stop_all)
     # )
+  end
+
+  def experiment
   end
 end
