@@ -1,0 +1,43 @@
+<script id="ToneCode">
+	Tone.Transport.start();
+	var am_synth = new Tone.AMSynth({
+    		});
+	am_synth.toMaster();
+	var sampler = new Tone.Sampler({
+				'C1': '/samples/lex/clap.wav','D1': '/samples/lex/snare.wav','C#1': '/samples/lex/gick.wav'
+			});
+	sampler.toMaster();
+
+				
+var part_1 = new Tone.Part(function(time, event){
+							sampler.triggerAttackRelease(event.note, event.duration, time)
+							}, JSON.parse('[{"time":"0 * 4n","note":"C1","duration":"16n"},{"time":"2 * 4n","note":"C1","duration":"16n"},{"time":"3 * 4n","note":"C#1","duration":"16n"},{"time":"1 * 4n","note":"D1","duration":"16n"}]')); 
+part_1.loop = true;
+part_1.loopEnd = '1m';
+				
+var part_2 = new Tone.Part(function(time, event){
+							sampler.triggerAttackRelease(event.note, event.duration, time)
+							}, JSON.parse('[{"time":"0 * 4n","note":"C1","duration":"16n"},{"time":"0.5 * 4n","note":"C1","duration":"16n"},{"time":"1.75 * 4n","note":"C1","duration":"16n"},{"time":"2 * 4n","note":"C1","duration":"16n"},{"time":"4 * 4n","note":"C1","duration":"16n"},{"time":"5 * 4n","note":"C1","duration":"16n"},{"time":"5.75 * 4n","note":"C1","duration":"16n"},{"time":"6 * 4n","note":"C1","duration":"16n"},{"time":"2.5 * 4n","note":"C#1","duration":"16n"},{"time":"3 * 4n","note":"C#1","duration":"16n"},{"time":"6.25 * 4n","note":"C#1","duration":"16n"},{"time":"7 * 4n","note":"C#1","duration":"16n"},{"time":"1.25 * 4n","note":"D1","duration":"16n"},{"time":"3.75 * 4n","note":"D1","duration":"16n"},{"time":"4.75 * 4n","note":"D1","duration":"16n"},{"time":"7.75 * 4n","note":"D1","duration":"16n"}]')); 
+							part_2.loop = true;
+							part_2.loopEnd = '2m';
+				
+var part_3 = new Tone.Part(function(time, event){
+							sampler.triggerAttackRelease(event.note, event.duration, time)
+							}, JSON.parse('[{"time":"0 * 4n","note":"C1","duration":"16n"},{"time":"1 * 4n","note":"C1","duration":"16n"},{"time":"1.75 * 4n","note":"C1","duration":"16n"},{"time":"2.25 * 4n","note":"C1","duration":"16n"},{"time":"4 * 4n","note":"C1","duration":"16n"},{"time":"5 * 4n","note":"C1","duration":"16n"},{"time":"5.75 * 4n","note":"C1","duration":"16n"},{"time":"6.5 * 4n","note":"C1","duration":"16n"},{"time":"2.5 * 4n","note":"C#1","duration":"16n"},{"time":"3.25 * 4n","note":"C#1","duration":"16n"},{"time":"5.5 * 4n","note":"C#1","duration":"16n"},{"time":"7 * 4n","note":"C#1","duration":"16n"},{"time":"1 * 4n","note":"D1","duration":"16n"},{"time":"3 * 4n","note":"D1","duration":"16n"},{"time":"4.25 * 4n","note":"D1","duration":"16n"},{"time":"7.75 * 4n","note":"D1","duration":"16n"}]')); 
+							part_3.loop = true;
+							part_3.loopEnd = '2m';
+
+var track_1 = [part_1, part_2, part_3];
+function start_in_session(part, track) {
+	track.forEach(function (this_part) {
+		if (this_part == part) {
+			this_part.start('@1m');
+		} else {
+			this_part.stop('@1m');
+		}
+	})
+}
+
+</script>
+
+				
