@@ -116,4 +116,7 @@ class SoundsController < ApplicationController
 
   def experiment
   end
+
+  def menu
+  end
 end
