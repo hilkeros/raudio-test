@@ -30,9 +30,26 @@ class Ableton
 			track.clip_slots.each do |slot|
 				track_array.push(slot)
 			end
-			this_session['track_' + (index + 1).to_s] = track_array
+			this_session[index] = track_array
 		end
 		return this_session
+	end
+
+	def build_session_for_instruments(*instruments)
+		s = self.build_session
+		parts = []
+		parts_lists = []
+		instruments.each_with_index do |instrument, index|
+			track = []
+			s[index].each do |slot|
+      	part = slot.build_part(instrument)
+      	parts.push(part)
+      	track.push(part)
+    	end
+    	parts_list = Ableton::PartsList.new(track)
+    	parts_lists.push(parts_list)
+    end
+		return parts, parts_lists 
 	end
 
 	def midi_note_to_note_name(note)
