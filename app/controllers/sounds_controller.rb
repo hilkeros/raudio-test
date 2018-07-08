@@ -94,16 +94,19 @@ class SoundsController < ApplicationController
     @synth.to_master
     @sampler.to_master
     a = Ableton.new('more-clips.xml')
-    parts, parts_lists = a.build_session_for_instruments(@synth, @sampler)
+    parts, tracks, scenes = a.build_session_for_instruments(@synth, @sampler)
 
-    @raudio = Audio.new.render(@synth, @sampler, *parts, *parts_lists)
+    @raudio = Audio.new.render(@synth, @sampler, *parts, *tracks, *scenes)
 
     @nexus = Nexus.new.render(
-        @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(parts_lists[0])),
-        @start_track_1_clip_2 = NxButton.new(parts[1].start_in_session(parts_lists[0])),
-        @start_track_2_clip_1 = NxButton.new(parts[2].start_in_session(parts_lists[1])),
-        @start_track_2_clip_2 = NxButton.new(parts[3].start_in_session(parts_lists[1])),
-        @start_track_2_clip_3 = NxButton.new(parts[4].start_in_session(parts_lists[1]))
+        @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(tracks[0])),
+        @start_track_1_clip_2 = NxButton.new(parts[1].start_in_session(tracks[0])),
+        @start_track_2_clip_1 = NxButton.new(parts[2].start_in_session(tracks[1])),
+        @start_track_2_clip_2 = NxButton.new(parts[3].start_in_session(tracks[1])),
+        @start_track_2_clip_3 = NxButton.new(parts[4].start_in_session(tracks[1])),
+        @start_scene_1 = NxButton.new(scenes[0].start_scene),
+        @start_scene_2 = NxButton.new(scenes[1].start_scene),
+        @start_scene_3 = NxButton.new(scenes[2].start_scene),
         )
    
     #   @stop_track_1 = NxButton.new(@part_1_1.stop_all),

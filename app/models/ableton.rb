@@ -38,18 +38,29 @@ class Ableton
 	def build_session_for_instruments(*instruments)
 		s = self.build_session
 		parts = []
-		parts_lists = []
+		tracks = []
+		scenes_hash = {}
 		instruments.each_with_index do |instrument, index|
 			track = []
-			s[index].each do |slot|
+			s[index].each_with_index do |slot, j|
       	part = slot.build_part(instrument)
       	parts.push(part)
       	track.push(part)
+      	if scenes_hash[j].blank?
+      		scenes_hash[j] = [part]
+      	else
+      		scenes_hash[j] = scenes_hash[j].push(part)
+    		end 
     	end
     	parts_list = Ableton::PartsList.new(track)
-    	parts_lists.push(parts_list)
+    	tracks.push(parts_list)
     end
-		return parts, parts_lists 
+    scenes = []
+    scenes_hash.each do |key, parts|
+    	scene = Ableton::PartsList.new(parts)
+    	scenes.push(scene)
+    end
+		return parts, tracks, scenes
 	end
 
 	def midi_note_to_note_name(note)
