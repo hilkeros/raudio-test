@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'sounds/midi'
   get 'sounds/ableton'
   get 'sounds/ableton_session'
+  get 'sounds/ableton_drum'
   get 'sounds/experiment'
 
   root 'sounds#menu'

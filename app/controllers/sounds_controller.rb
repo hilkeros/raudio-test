@@ -114,6 +114,12 @@ class SoundsController < ApplicationController
     # )
   end
 
+  def ableton_drum
+     a = Ableton.new('drum-rack.xml')
+     @sampler = a.midi_tracks.first.drum_rack.build_sampler
+     @raudio = Audio.new.render(@sampler)
+  end
+
   def experiment
   end
 

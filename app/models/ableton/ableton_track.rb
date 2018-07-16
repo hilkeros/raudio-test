@@ -17,7 +17,8 @@ class Ableton::AbletonTrack < Ableton
 		return slots
 	end
 
+	def drum_rack
+		 Ableton::DrumRack.new(@track_xml.css('DrumGroupDevice'))
+	end
 	
-
-
 end
