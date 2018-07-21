@@ -124,10 +124,10 @@ class SoundsController < ApplicationController
      parts, tracks, scenes = a.build_session_for_instruments(@samples, @drums)
      @raudio = Audio.new.render(@samples, @drums, *parts, *tracks, *scenes)
 
-      @nexus = Nexus.new.render(
-        @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(tracks[0])),
-         @start_track_2_clip_1 = NxButton.new(parts[1].start_in_session(tracks[1]))
-        )
+    @nexus = Nexus.new.render(
+      @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(tracks[0])),
+       @start_track_2_clip_1 = NxButton.new(parts[1].start_in_session(tracks[1]))
+      )
   end
 
   def experiment
