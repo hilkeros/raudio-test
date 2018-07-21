@@ -115,9 +115,19 @@ class SoundsController < ApplicationController
   end
 
   def ableton_drum
-     a = Ableton.new('drum-rack.xml')
-     @sampler = a.midi_tracks.first.drum_rack.build_sampler
-     @raudio = Audio.new.render(@sampler)
+     a = Ableton.new('clean-rack.xml')
+     @samples = a.midi_tracks[0].drum_rack.build_sampler('/samples/visitor/')
+     @drums = a.midi_tracks[1].drum_rack.build_sampler('/samples/visitor/')
+     @samples.to_master
+     @drums.to_master
+
+     parts, tracks, scenes = a.build_session_for_instruments(@samples, @drums)
+     @raudio = Audio.new.render(@samples, @drums, *parts, *tracks, *scenes)
+
+      @nexus = Nexus.new.render(
+        @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(tracks[0])),
+         @start_track_2_clip_1 = NxButton.new(parts[1].start_in_session(tracks[1]))
+        )
   end
 
   def experiment

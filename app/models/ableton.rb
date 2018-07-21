@@ -67,6 +67,10 @@ class Ableton
 		midi_converter_array[note.to_i]
 	end
 
+	def drum_track_note_to_note_name(note)
+		midi_converter_array.reverse[note.to_i - 9]
+	end
+
 	#converts the Ableton xml durations to Tone.js notation with n and m
 	def duration_converter(ableton_value)
 		if ableton_value.to_f < 4
