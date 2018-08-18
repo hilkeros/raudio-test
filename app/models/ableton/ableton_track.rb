@@ -20,5 +20,9 @@ class Ableton::AbletonTrack < Ableton
 	def drum_rack
 		 Ableton::DrumRack.new(@track_xml.css('DrumGroupDevice'))
 	end
+
+	def simpler
+		Ableton::Simpler.new(@track_xml)
+	end
 	
 end

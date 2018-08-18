@@ -11,7 +11,30 @@ class Ableton
 	end
 
 	def xml
-		Nokogiri::XML(File.open(path))
+		if File.extname(path) == ('.xml')
+			Nokogiri::XML(File.open(path))
+		elsif File.extname(path) == '.als'
+			xml_file = @file.gsub('.als', '.xml')
+			xml_path = Rails.root.join("public/ableton/#{xml_file}")
+			# check if an xml version was already created
+			if File.file?(xml_path)
+				Nokogiri::XML(File.open(xml_path))
+			else
+				# rename and unzip
+				renamed_file = @file.gsub('.als', '.gzip')
+				renamed_path = Rails.root.join("public/ableton/#{renamed_file}")
+				File.rename(path, renamed_path)
+				gzip = File.open(renamed_path)
+				unzipped = Zlib::GzipReader.new(StringIO.new(gzip.read)).read
+				# create xml version
+				xml_file = File.write(xml_path, unzipped)
+				# rename back to .als
+				File.rename(renamed_path, path)
+				Nokogiri::XML(unzipped)
+			end
+		else
+			raise "Can't read file"
+		end
 	end
 
 	def midi_tracks
