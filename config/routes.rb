@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'sounds/ableton_drum'
   get 'sounds/experiment'
 
+  get 'rulumu/paradoxes'
+
   root 'sounds#menu'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
