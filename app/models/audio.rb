@@ -1,7 +1,12 @@
 class Audio
 
 
-	def to_master
+	def initialize(bpm: 120)
+    @bpm = bpm
+  end
+
+
+  def to_master
   	@scripts << "#{identifier}.toMaster();"
   end
 
@@ -41,7 +46,7 @@ class Audio
   end
 
   def render(*nodes)
-  	script = ["Tone.Transport.start();"]
+  	script = ["Tone.Transport.bpm.value = #{@bpm}; Tone.Transport.start();"]
   	nodes.each do |node|
   		script << node.scripts
   	end
