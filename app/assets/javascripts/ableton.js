@@ -11,6 +11,6 @@ function start_in_session(part, track) {
 function start_scene(scene) {
 	scene.forEach(function (part) {
 		//should be start_in_session, but for that we need to know to which track the part belongs
-		part.start('@1m'); 
+		start_in_session(part, part.track); 
 	})
 }

@@ -83,6 +83,9 @@ class Ableton
     	scene = Ableton::PartsList.new(parts)
     	scenes.push(scene)
     end
+    tracks.each do |track|
+    	track.link_parts_to_track
+    end
 		return parts, tracks, scenes
 	end
 
