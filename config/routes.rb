@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'sounds/ableton_session'
   get 'sounds/ableton_drum'
   get 'sounds/experiment'
+  get 'sounds/scroll'
 
   get 'rulumu/paradoxes'
 

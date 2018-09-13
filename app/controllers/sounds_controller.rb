@@ -133,6 +133,25 @@ class SoundsController < ApplicationController
   def experiment
   end
 
+  def scroll
+    @synth = AMSynth.new
+    @sampler = Sampler.new(
+      'C1': '/samples/lex/clap.wav',
+      'D1': '/samples/lex/snare.wav',
+      'C#1': '/samples/lex/gick.wav'
+      )
+    @synth.to_master
+    @sampler.to_master
+    a = Ableton.new('more-clips.xml')
+    parts, tracks, scenes = a.build_session_for_instruments(@synth, @sampler)
+
+    @raudio = Audio.new.render(@synth, @sampler, *parts, *tracks, *scenes)
+    @start_first_scene = ScrollY.new('>2000', scenes[0].start_scene)
+    @stop = ScrollY.new('>6000', parts[0].stop_all)
+
+    @interaction = Interaction.new.render(@start_first_scene, @stop)
+  end
+
   def menu
   end
 end
