@@ -22502,7 +22502,11 @@
 	                //convert the note name to MIDI
 	                var mid = Tone.Frequency(note).toMidi();
 	                sampleMap[mid] = urls[note];
-	                urlMap[mid] = urls[note]['file'];
+	                if ( sampleMap[mid] instanceof Object) {
+	                	urlMap[mid] = urls[note]['file'];
+	                } else {
+	                	urlMap[mid] = urls[note];
+	                }
 	            } else if (!isNaN(parseFloat(note))) {
 	                //otherwise if it's numbers assume it's midi
 	                sampleMap[note] = urls[note];

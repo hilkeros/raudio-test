@@ -25,7 +25,7 @@ class Ableton::AbletonClip < Ableton
 			events.each do |event|
 				time = event['Time']
 				duration = duration_converter(event['Duration'])
-				array.push({ time: time.to_s + ' * 4n', note: note_name, duration: duration })
+				array.push({ time: '4n: ' + time.to_s, note: note_name, duration: duration })
 			end
 		end
 		return array
