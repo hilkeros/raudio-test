@@ -1,51 +1,12 @@
-<style>
-	body {
-		background: #000;	
-	}
-	#canvas {
-		position: fixed;
-		background: #000;
-		width: 100vw;
-		height:100vh;
-		margin:0;
-	}
-	#video { display: none; }
-</style>
 
-<div style='height: 5000px; width: 3000px'>
-	<%= image_tag 'table.jpg', id: 'video' %>
-	<!-- <video src="<%= video_url('nomad.mp4') %>" id="video"> -->
-	<canvas id='canvas'></canvas>
-</div>
 
 <script>
-	window.addEventListener('scroll', function(event)
-	{
-		var top = this.scrollY, left = this.scrollX;
-		console.log(top, left)
-	}, false);
+	sampler = new Tone.Sampler(
+		{'C1': {'file': '/samples/visitor/vsitor1.wav', 'loopStart': 0.44, 'transpose': -5},
+			'D1': {'file': '/samples/visitor/vsitor2.wav', 'loopStart': 0, 'loopEnd': 0.5}
+    }, function(){sampler.triggerAttack('C1')});
+	sampler.toMaster();
 
-
-	var seriously, blur, target, reformat;
-	var canvas = document.getElementById('canvas');
-
-	seriously = new Seriously();
-
-	reformat = seriously.transform('reformat');
-	reformat.source = '#video';
-	reformat.width = canvas.width;
-	reformat.height = canvas.height;
-
-	blur = seriously.effect('blur');
-	blur.source = reformat;
-	blur.amount = 0.8;
-
-	target = seriously.target('#canvas');
-	target.source = blur;
-
-	seriously.go(function (now) {
-		
-	});
 
 </script>
 
