@@ -1,7 +1,7 @@
 class ScrollY
 	attr_accessor :scripts
 
-	def initialize(y, condition, *events)
+	def initialize(condition, *events)
 		js_condition = 'window.pageYOffset' + condition
 		@scripts = "if(#{js_condition} && #{identifier} == 0) {
 		    	 #{identifier} = 1;
