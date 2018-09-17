@@ -29,9 +29,10 @@ class WacController < ApplicationController
 	end
 
 	def other_drums
-		ableton = Ableton.new('wac.als')
+		ableton = Ableton.new('wacs.als')
     beats = Sampler.new(
-    	'C1': '/samples/lex/clap.wav',
+    	'C1': '/samples/lex/Kick Big Sine.wav' ,
+    	'C#1': '/samples/lex/clap.wav',
   		'D1': '/samples/lex/snare.wav',
   		'E1': '/samples/lex/gick.wav'
     	)
@@ -42,8 +43,8 @@ class WacController < ApplicationController
    	parts, tracks, scenes = ableton.build_session_for_instruments(beats, samples)
     @raudio = Audio.new(bpm: 80).render(beats, samples, *parts, *tracks, *scenes)
 
-    start_first_scene = ScrollY.new('>2000', scenes[0].start_scene)
-    start_second_scene = ScrollY.new('>6000', scenes[1].start_scene)
+    start_first_scene = ScrollY.new('>500', scenes[0].start_scene)
+    start_second_scene = ScrollY.new('>2000', scenes[1].start_scene)
     @interaction = Interaction.new.render(start_first_scene, start_second_scene)
 	end
 
