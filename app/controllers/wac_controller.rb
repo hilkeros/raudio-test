@@ -10,11 +10,11 @@ class WacController < ApplicationController
    	parts, tracks, scenes = ableton.build_session_for_instruments(beats, samples)
     @raudio = Audio.new(bpm: 80).render(beats, samples, *parts, *tracks, *scenes)
 
-    #build a Nexus interface
+    @nexus, @grid = ableton.build_interface(parts, tracks, scenes)
 	end
 
 	def scroll
-		ableton = Ableton.new('wac.als')
+		ableton = Ableton.new('wacs.als')
     beats = ableton.midi_tracks[0].drum_rack.build_sampler('/samples/wac/')
    	samples = ableton.midi_tracks[1].drum_rack.build_sampler('/samples/wac/')
    	beats.to_master
@@ -23,8 +23,8 @@ class WacController < ApplicationController
    	parts, tracks, scenes = ableton.build_session_for_instruments(beats, samples)
     @raudio = Audio.new(bpm: 80).render(beats, samples, *parts, *tracks, *scenes)
 
-    start_first_scene = ScrollY.new('>2000', scenes[0].start_scene)
-    start_second_scene = ScrollY.new('>6000', scenes[1].start_scene)
+    start_first_scene = ScrollY.new('>500', scenes[0].start_scene)
+    start_second_scene = ScrollY.new('>2000', scenes[1].start_scene)
     @interaction = Interaction.new.render(start_first_scene, start_second_scene)
 	end
 
