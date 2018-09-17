@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   get 'sounds/experiment'
   get 'sounds/scroll'
 
+  get 'wac/ableton'
+  get 'wac/scroll'
+  get 'wac/other_drums'
+  get 'wac/effects'
+
   get 'rulumu/paradoxes'
 
   root 'sounds#menu'
