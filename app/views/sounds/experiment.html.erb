@@ -4,12 +4,18 @@
 	sampler = new Tone.Sampler(
 		{'C1': {'file': '/samples/visitor/vsitor1.wav', 'loopStart': 0.5, 'transpose': -12},
 			'D1': {'file': '/samples/visitor/vsitor2.wav', 'loopStart': 0, 'loopEnd': 0.5}
-    }, function(){sampler.triggerAttackRelease('C1', '16n,', 0, 1)});
+    });
 	sampler.toMaster();
 
-	part = new Tone.Part(function(time, value){
-		sampler.triggerAttackRelease(note, "8n", time);
-		}, [[0, "C1"], ["0:2", "D1"]]);
+	var synth = new Tone.Synth().toMaster()
+
+	//pass in an array of events
+	var part = new Tone.Part(function(time, event){
+		//the events will be given to the callback with the time they occur
+		sampler.triggerAttackRelease(event.note, event.dur, time)
+	}, [{ time : 0, note : 'C1', dur : '4n'},
+		{ time : 3.4 * Tone.Time('4n'), note : 'D1', dur : '8n'}
+		])
 	part.loop = true;
 	part.loopEnd = '1m';
 
@@ -17,6 +23,7 @@
 	nx.onload = function() {button_1.on('*',function(data) {
 	            if(data.press==1){
 	              console.log(data);
+	              Tone.Transport.start();
 	              part.start(0);
 	            }
 	          })
