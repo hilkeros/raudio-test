@@ -23,7 +23,7 @@ class Ableton::AbletonClip < Ableton
 			note_name = midi_note_to_note_name(note)
 			events = key.css('MidiNoteEvent')
 			events.each do |event|
-				time = event['Time'] + " * Tone.Time('4n')"
+				time = event['Time'].to_f
 				duration = duration_converter(event['Duration'])
 				array.push({ time: time, note: note_name, duration: duration })
 			end

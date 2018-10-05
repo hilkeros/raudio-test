@@ -14,3 +14,19 @@ function start_scene(scene) {
 		start_in_session(part, part.track); 
 	})
 }
+
+function to_tone_values(events) {
+	new_map = []
+	events.forEach(function (event) {
+		new_time = event['time'] * Tone.Time('4n')
+		new_event = {'time': new_time, 'note': event['note'], 'duration': event['duration']}
+		new_map.push(new_event);
+	})
+	return new_map
+}
+
+// function to_tone_values(events) {
+//   return events.map(function(event) {
+//     { 'time': event.time * Tone.Time('4n'), 'note': event.note, 'duration': event.duration }
+//   })
+// }

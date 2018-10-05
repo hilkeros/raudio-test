@@ -10,7 +10,7 @@ class Part < Audio
 
 		@scripts = ["var #{identifier} = new Tone.Part(function(time, event){
 							#{@instrument}.triggerAttackRelease(event.note, event.duration, time)
-							}, #{@midi_events}); 
+							}, to_tone_values(#{@midi_events})); 
 							#{identifier}.loop = #{@loop};
 							#{identifier}.loopEnd = '#{@loopEnd}';
 				"]
