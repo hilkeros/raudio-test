@@ -76,6 +76,9 @@ class Ableton
     		end 
     	end
     	parts_list = Ableton::PartsList.new(track)
+    	track.each do |part|
+    		part.track = parts_list
+    	end
     	tracks.push(parts_list)
     end
     scenes = []
@@ -116,6 +119,55 @@ class Ableton
 			end
 		end
 		return array
+	end
+
+	def build_interface(parts, tracks, scenes)
+		part_counter = 0
+    buttons = []
+    
+    scenes.each do |scene|
+    	row = []
+    	scene.parts.each do |part|
+    		part_button = NxButton.new(part.start_in_session(part.track))
+    		row.push(part_button)
+    	end
+    	scene_button = NxButton.new(scene.start_scene)
+    	row.push(scene_button)
+    	buttons.push(row)
+    end
+
+
+    # scenes.each do |scene|
+    # 	row = []
+    # 	scene_button = NxButton.new(scene.start_scene)
+    # 	tracks.count.times do |i|
+    # 		part_button = NxButton.new(parts[part_counter].start_in_session(tracks[i]))
+    # 		part_counter = part_counter + 1
+    # 		row.push(part_button)
+    # 	end
+    # 	row.push(scene_button)
+    # 	buttons.push(row)
+    # end
+
+    nexus = Nexus.new.render(*buttons.flatten)
+
+    grid = "<table><tr><td></td>"
+    tracks.count.times do |i|
+    	grid << "<td>t#{i + 1}</td>"
+  	end
+  	grid << "<td>master</td></tr>"
+  	buttons.each_with_index do |row, index|
+  		grid << "<tr><td>s#{index + 1}</td>"
+  			row.each do |btn|
+  				grid << "<td><canvas nx='button' id='#{btn.identifier}'></canvas></td>"
+  			end
+  		grid << "</tr>"
+  	end
+  	grid << "</table>"
+  	grid = grid.html_safe
+
+  	return nexus, grid
+
 	end
 
 end

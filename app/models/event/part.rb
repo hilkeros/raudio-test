@@ -1,6 +1,6 @@
 class Part < Audio
 
-	attr_accessor :event, :interval, :scripts
+	attr_accessor :event, :interval, :track, :scripts
 	def initialize(instrument, midi_events = [], loop = false, loopEnd = '1m')
 		@instrument = instrument.identifier
 		@midi_events = midi_events.to_json

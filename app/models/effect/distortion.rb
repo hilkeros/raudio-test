@@ -1,9 +1,11 @@
 class Distortion < Audio
 
-	attr_accessor :scripts
+	attr_accessor :scripts, :distortion, :oversample
 
-	def initialize()
-		@scripts = ["var #{identifier} = new Tone.Distortion();"]
+	def initialize(distortion = 0.4, oversample: 'none')
+		@distortion = distortion
+		@oversample = oversample
+		@scripts = ["var #{identifier} = new Tone.Distortion(#{@distortion}, '#{@oversample}');"]
 	end
 
 	def identifier
