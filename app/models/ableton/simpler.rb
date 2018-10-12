@@ -17,6 +17,6 @@ class Ableton::Simpler < Ableton
 
 
 	def build_sampler(sample_folder_path = '/samples/')
-		Sampler.new(self.root_key => sample_folder_path + self.sample_file )
+		Sampler.new('C3' => sample_folder_path + self.sample_file )
 	end
 end

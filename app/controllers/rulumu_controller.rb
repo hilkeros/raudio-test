@@ -1,29 +1,29 @@
 class RulumuController < ApplicationController
 	def paradoxes
-		a = Ableton.new('paradoxes.als')
-		@beat = a.midi_tracks[0].drum_rack.build_sampler('/samples/rulumu/')
-		@snare = a.midi_tracks[1].drum_rack.build_sampler('/samples/rulumu/')
-		@pad = a.midi_tracks[2].drum_rack.build_sampler('/samples/rulumu/')
-		@bell = a.midi_tracks[3].drum_rack.build_sampler('/samples/rulumu/')
-		#@east = a.midi_tracks[4].simpler.build_sampler('/samples/rulumu/')
-		@beat.to_master
-		@snare.to_master
-		@pad.to_master
-		@bell.to_master
-		#@east.to_master
+		ableton = Ableton.new('paradoxes simplers only.als')
 
-		parts, tracks, scenes = a.build_session_for_instruments(@beat, @snare, @pad, @bell)
-		@raudio = Audio.new(bpm: 90).render(@beat, @snare, @pad, @bell,  *parts, *tracks, *scenes)
+    beats 	= 	ableton.midi_tracks[0].drum_rack.build_sampler('/samples/rulumu/mp3/')
+   	snare 	= 	ableton.midi_tracks[1].drum_rack.build_sampler('/samples/rulumu/mp3/')
+   	pad 		= 	ableton.midi_tracks[2].simpler.build_sampler('/samples/rulumu/mp3/')
+   	bell 		= 	ableton.midi_tracks[3].simpler.build_sampler('/samples/rulumu/mp3/')
+   	east 		= 	ableton.midi_tracks[4].simpler.build_sampler('/samples/rulumu/mp3/')
+   	hihat 	= 	ableton.midi_tracks[5].drum_rack.build_sampler('/samples/rulumu/mp3/')
+   	low_c 	= 	ableton.midi_tracks[6].simpler.build_sampler('/samples/rulumu/mp3/')
+   	high_c 	= 	ableton.midi_tracks[7].simpler.build_sampler('/samples/rulumu/mp3/')
 
-		@nexus = Nexus.new.render(
-        @start_track_1_clip_1 = NxButton.new(parts[0].start_in_session(tracks[0])),
-        @start_track_1_clip_2 = NxButton.new(parts[1].start_in_session(tracks[0])),
-        @start_track_2_clip_1 = NxButton.new(parts[2].start_in_session(tracks[1])),
-        @start_track_2_clip_2 = NxButton.new(parts[3].start_in_session(tracks[1])),
-        @start_track_2_clip_3 = NxButton.new(parts[4].start_in_session(tracks[1])),
-        @start_scene_1 = NxButton.new(scenes[0].start_scene),
-        @start_scene_2 = NxButton.new(scenes[1].start_scene),
-        @start_scene_3 = NxButton.new(scenes[2].start_scene),
-        )
+
+   	beats.to_master
+   	snare.to_master
+   	pad.to_master
+   	bell.to_master
+   	east.to_master
+   	hihat.to_master
+   	low_c.to_master
+   	high_c.to_master
+
+   	parts, tracks, scenes = ableton.build_session_for_instruments(beats, snare, pad, bell, east, hihat, low_c, high_c)
+    @raudio = Audio.new(bpm: 80).render(beats, snare, pad, bell, east, hihat, low_c, high_c, *parts, *tracks, *scenes)
+
+    @nexus, @grid = ableton.build_interface(parts, tracks, scenes)
 	end
 end

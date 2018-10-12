@@ -22596,7 +22596,8 @@
 	                'loopEnd': loopEnd,
 	                'fadeIn': this.attack,
 	                'fadeOut': this.release,
-	                'curve': 'exponential'
+	                'curve': 'exponential',
+	                'loop': true
 	            }).connect(this.output);
 	            source.start(time, loopStart, loopEnd - loopStart, velocity);
 	            // add it to the active sources
