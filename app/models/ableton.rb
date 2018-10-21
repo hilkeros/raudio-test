@@ -1,9 +1,10 @@
 class Ableton
 
-	attr_accessor :file
+	attr_accessor :file, :instruments
 
-	def initialize(file = "basic-midi-clip.xml" )
+	def initialize(file = "basic-midi-clip.xml", instruments = [] )
 		@file = file
+		@instruments = instruments
 	end
 
 	def path
@@ -122,9 +123,9 @@ class Ableton
 	end
 
 	def build_interface(parts, tracks, scenes)
-		part_counter = 0
     buttons = []
-    
+    dials = []
+
     scenes.each do |scene|
     	row = []
     	scene.parts.each do |part|
@@ -136,36 +137,34 @@ class Ableton
     	buttons.push(row)
     end
 
-
-    # scenes.each do |scene|
-    # 	row = []
-    # 	scene_button = NxButton.new(scene.start_scene)
-    # 	tracks.count.times do |i|
-    # 		part_button = NxButton.new(parts[part_counter].start_in_session(tracks[i]))
-    # 		part_counter = part_counter + 1
-    # 		row.push(part_button)
-    # 	end
-    # 	row.push(scene_button)
-    # 	buttons.push(row)
-    # end
-
-    nexus = Nexus.new.render(*buttons.flatten)
-
+    # track titles
     grid = "<table><tr><td></td>"
     tracks.count.times do |i|
     	grid << "<td>t#{i + 1}</td>"
   	end
   	grid << "<td>master</td></tr>"
+  	# volume dials
+  	if @instruments.present?
+  		grid << "<tr><td>vol</td>"
+  		@instruments.count.times do |i|
+  			dial = NxDial.new(instruments[i], 'volume', {'min': -30, 'max': 6})
+  			grid << "<td><span id='#{dial.identifier}'></span><br>
+  			&nbsp; <span id='number_#{dial.identifier}'></span></td>"
+  			dials.push(dial)
+  		end
+  	end
+  	# scene buttons
   	buttons.each_with_index do |row, index|
   		grid << "<tr><td>s#{index + 1}</td>"
   			row.each do |btn|
-  				grid << "<td><canvas nx='button' id='#{btn.identifier}'></canvas></td>"
+  				grid << "<td><div id='#{btn.identifier}'></div></td>"
   			end
   		grid << "</tr>"
   	end
   	grid << "</table>"
   	grid = grid.html_safe
 
+  	nexus = Nexus.new.render(*dials, *buttons.flatten)
   	return nexus, grid
 
 	end

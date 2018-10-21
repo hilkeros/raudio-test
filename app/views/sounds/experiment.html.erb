@@ -1,18 +1,23 @@
 
-
+<div id="play"></div>
+<div id="volume"></div>
 <script>
-	sampler = new Tone.Sampler(
-		{'C1': {'file': '/samples/visitor/vsitor1.wav', 'loopStart': 0.1, 'transpose': -12},
-			'D1': {'file': '/samples/visitor/vsitor2.wav', 'loopStart': 0, 'transpose': -8}
-    });
-	sampler.toMaster();
+	
+	var player = new Tone.Sampler({
+			"C1" : "/samples/rulumu/mp3/east.mp3",
+		}).toMaster();
 
-	var synth = new Tone.Synth().toMaster()
+	var reverb = new Tone.Reverb(6.3)
+			.receive("reverb")
+			.toMaster();
+
+	player.send("reverb", 10);
+	player.volume = 0.2;
 
 	//pass in an array of events
 	var part = new Tone.Part(function(time, event){
 		//the events will be given to the callback with the time they occur
-		sampler.triggerAttackRelease(event.note, event.dur, time)
+		player.triggerAttackRelease(event.note, event.dur, time)
 	}, [{ time : 0, note : 'C1', dur : '4n'},
 		{ time : 3.4 * Tone.Time('4n'), note : 'D1', dur : '8n'}
 		])
@@ -20,18 +25,27 @@
 	part.loopEnd = '1m';
 
 
-	nx.onload = function() {button_1.on('*',function(data) {
-	            if(data.press==1){
-	              console.log(data);
-	              Tone.Transport.start();
-	              part.start(0);
-	            }
-	          })
-}
+  var dial = new Nexus.Dial('#volume', 
+  	{'min': -30,'max': 6, 'value': 0}
+  	);
+  var button = new Nexus.Button('#play') 
+
+  button.on('change',function(v) {
+            if(v.state === true){
+       
+              Tone.Transport.start();
+              part.start();
+            }
+            console.log(v);
+          })
+	dial.on('change',function(v) {
+         player.volume.value = v
+        })
+
 
 
 </script>
 
-<canvas nx="button" id="button_1"></canvas>
+
 
 				

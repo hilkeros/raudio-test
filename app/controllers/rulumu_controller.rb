@@ -21,6 +21,7 @@ class RulumuController < ApplicationController
    	low_c.to_master
    	high_c.to_master
 
+    ableton.instruments = [beats, snare, pad, bell, east, hihat, low_c, high_c]
    	parts, tracks, scenes = ableton.build_session_for_instruments(beats, snare, pad, bell, east, hihat, low_c, high_c)
     @raudio = Audio.new(bpm: 80).render(beats, snare, pad, bell, east, hihat, low_c, high_c, *parts, *tracks, *scenes)
 

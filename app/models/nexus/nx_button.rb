@@ -3,9 +3,9 @@ class NxButton < Nexus
 	attr_accessor :scripts
 
 	def initialize(*events)
-		@scripts = ["#{identifier}.on('*',function(data) {
-            if(data.press==1){
-              console.log(data);
+		@scripts = ["var #{identifier} = new Nexus.Button('##{identifier}');
+			#{identifier}.on('change',function(v) {
+            if(v.state === true){
               #{events.join(';')}
             }
           })"

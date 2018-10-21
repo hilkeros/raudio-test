@@ -2,10 +2,14 @@ class NxDial < Nexus
 
 	attr_accessor :scripts
 
-	def initialize(node, parameter)
+	def initialize(node, parameter, options = {})
 		@node = node.identifier
-		@scripts = ["#{identifier}.on('*',function(data) {
-           #{@node}.#{parameter}.value = data.value
+		@scripts = ["var #{identifier} = new Nexus.Dial('##{identifier}', #{options.to_json} );
+			var number_#{identifier} = new Nexus.Number('#number_#{identifier}');
+			number_#{identifier}.link(#{identifier});
+			#{identifier}.on('change',function(v) {
+           console.log(v);
+           #{@node}.#{parameter}.value = v
           })"
 		]
 	end
