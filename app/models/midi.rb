@@ -51,7 +51,7 @@ class Midi
 
   			function stopNote(note) {" + @instrument +
 
-				".triggerRelease();
+				".triggerRelease(midi_converter[note]);
 			}
 		}</script>").html_safe
 

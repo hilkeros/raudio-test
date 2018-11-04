@@ -1,13 +1,16 @@
 <h1>Sounds#beat_loop</h1>
 <p>Find me in app/views/sounds/beat_loop.html.erb</p>
+
+clap loop: <span id="<%= @button1.identifier %>"></span>
+snare loop: <span id="<%= @button2.identifier %>"></span>
+stop  all: <span id="<%= @button3.identifier %>"></span>
+<br/>
+delay time: <span id="<%= @dial1.identifier %>"></span>
+<span id="number_<%= @dial1.identifier %>"></span>
+delay feedback: <span id="<%= @dial2.identifier %>"></span>
+<span id="number_<%= @dial2.identifier %>"></span>
+delay dry/wet: <span id="<%= @dial3.identifier %>"></span>
+<span id="number_<%= @dial3.identifier %>"></span>
+
 <%= @raudio %>
 <%= @nexus %>
-
-
-clap loop: <canvas nx="button" id="<%= @button1.identifier %>"></canvas>
-snare loop: <canvas nx="button" id="<%= @button2.identifier %>"></canvas>
-stop  all: <canvas nx="button" id="<%= @button3.identifier %>"></canvas>
-<br/>
-delay time: <canvas nx="dial" id="<%= @dial1.identifier %>"></canvas>
-delay feedback: <canvas nx="dial" id="<%= @dial2.identifier %>"></canvas>
-delay dry/wet: <canvas nx="dial" id="<%= @dial3.identifier %>"></canvas>

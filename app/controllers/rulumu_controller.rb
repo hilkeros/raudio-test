@@ -27,4 +27,15 @@ class RulumuController < ApplicationController
 
     @nexus, @grid = ableton.build_interface(parts, tracks, scenes)
 	end
+
+  def synth
+    ableton = Ableton.new('paradoxes simplers only.als')
+    pad     =   ableton.midi_tracks[2].simpler.build_sampler('/samples/rulumu/mp3/')
+    delay = FeedbackDelay.new('8n', 0.5)
+    pad.connect(delay)
+    delay.to_master
+    #pad.to_master
+    @raudio = Audio.new.render(delay, pad)
+    @midi = Midi.new(pad).script
+  end
 end

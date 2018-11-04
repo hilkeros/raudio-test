@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'wac/effects'
 
   get 'rulumu/paradoxes'
+  get 'rulumu/synth'
 
   root 'sounds#menu'
 

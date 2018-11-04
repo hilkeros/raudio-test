@@ -8,7 +8,6 @@ class NxDial < Nexus
 			var number_#{identifier} = new Nexus.Number('#number_#{identifier}');
 			number_#{identifier}.link(#{identifier});
 			#{identifier}.on('change',function(v) {
-           console.log(v);
            #{@node}.#{parameter}.value = v
           })"
 		]

@@ -1,10 +1,10 @@
 <h1>Sounds#sampler</h1>
 <p>Find me in app/views/sounds/sampler.html.erb</p>
 <p>Click the buttons to trigger the samples.</p>
+
+<span id="<%= @button1.identifier %>"></span>
+<span id="<%= @button2.identifier %>"></span>
+<span id="<%= @button3.identifier %>"></span>
+
 <%= @raudio %>
 <%= @nexus %>
-
-
-<canvas nx="button" id="<%= @button1.identifier %>"></canvas>
-<canvas nx="button" id="<%= @button2.identifier %>"></canvas>
-<canvas nx="button" id="<%= @button3.identifier %>"></canvas>

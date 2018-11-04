@@ -1,8 +1,8 @@
 <h1>Sounds#sine</h1>
 <p>Find me in app/views/sounds/sine.html.erb</p>
 <p>Right now two synths playing a loop. Click the left button to start the loop. The right button to stop it.</p>
+
+<span id="<%= @start_button.identifier %>"></span>
+<span id="<%= @stop_button.identifier %>"></span>
 <%= @raudio %>
 <%= @nexus %>
-
-<canvas nx="button" id="<%= @start_button.identifier %>"></canvas>
-<canvas nx="button" id="<%= @stop_button.identifier %>"></canvas>

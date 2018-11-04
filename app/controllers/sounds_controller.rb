@@ -55,7 +55,7 @@ class SoundsController < ApplicationController
   	@synth = PolySynth.new
   	@synth.to_master
   	@raudio = Audio.new.render(@synth)
-  	@midi = Midi.new(@synth).script;
+  	@midi = Midi.new(@synth).script
   end
 
   def ableton
