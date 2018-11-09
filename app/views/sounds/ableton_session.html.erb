@@ -1,6 +1,3 @@
-<%= @raudio %>
-<%= @nexus %>
-<%= @scenes %>
 <table>
 	<tr>
 		<td>Tracks</td>
@@ -11,49 +8,52 @@
 	<tr>
 		<td>Scene 1</td>
 		<td>
-			<canvas nx="button" id="<%= @start_scene_1.identifier %>"></canvas>
+			<span id="<%= @start_scene_1.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%= @start_track_1_clip_1.identifier %>"></canvas>
+			<span id="<%= @start_track_1_clip_1.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%= @start_track_2_clip_1.identifier %>"></canvas>
+			<span id="<%= @start_track_2_clip_1.identifier %>"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Scene 2</td>
 		<td>
-			<canvas nx="button" id="<%= @start_scene_2.identifier %>"></canvas>
+			<span id="<%= @start_scene_2.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%= @start_track_1_clip_2.identifier %>"></canvas>
+			<span id="<%= @start_track_1_clip_2.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%= @start_track_2_clip_2.identifier %>"></canvas>
+			<span id="<%= @start_track_2_clip_2.identifier %>"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Scene 3</td>
 		<td>
-			<canvas nx="button" id="<%= @start_scene_3.identifier %>"></canvas>
+			<span id="<%= @start_scene_3.identifier %>"></span>
+		</td>
+		<td>		
 		</td>
 		<td>
-			
-		</td>
-		<td>
-			<canvas nx="button" id="<%= @start_track_2_clip_3.identifier %>"></canvas>
+			<span id="<%= @start_track_2_clip_3.identifier %>"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Stop</td>
 		<td>
-			<canvas nx="button" id="stop_all_scenes"></canvas>
+			<span id="stop_all_scenes"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%#= @stop_track_1.identifier %>"></canvas>
+			<span id="<%#= @stop_track_1.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%#= @stop_track_2.identifier %>"></canvas>
+			<span id="<%#= @stop_track_2.identifier %>"></span>
 		</td>
 	</tr>
 </table>
+
+<%= @raudio %>
+<%= @nexus %>
+<%= @scenes %>

@@ -1,6 +1,3 @@
-<%= @raudio %>
-<%= @nexus %>
-
 <table>
 	<tr>
 		<td>Tracks</td>
@@ -10,19 +7,22 @@
 	<tr>
 		<td>Track 1</td>
 		<td>
-			<canvas nx="button" id="<%= @start_1_button.identifier %>"></canvas>
+			<span id="<%= @start_1_button.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%= @stop_1_button.identifier %>"></canvas>
+			<span id="<%= @stop_1_button.identifier %>"></span>
 		</td>
 	</tr>
 	<tr>
 		<td>Track 2</td>
 		<td>
-			<canvas nx="button" id="<%= @start_2_button.identifier %>"></canvas>
+			<span id="<%= @start_2_button.identifier %>"></span>
 		</td>
 		<td>
-			<canvas nx="button" id="<%= @stop_2_button.identifier %>"></canvas>
+			<span id="<%= @stop_2_button.identifier %>"></span>
 		</td>
 	</tr>
 </table>
+
+<%= @raudio %>
+<%= @nexus %>

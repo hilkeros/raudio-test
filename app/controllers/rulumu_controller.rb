@@ -38,4 +38,7 @@ class RulumuController < ApplicationController
     @raudio = Audio.new.render(delay, pad)
     @midi = Midi.new(pad).script
   end
+
+  def visual
+  end
 end
