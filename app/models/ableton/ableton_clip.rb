@@ -24,8 +24,9 @@ class Ableton::AbletonClip < Ableton
 			events = key.css('MidiNoteEvent')
 			events.each do |event|
 				time = event['Time'].to_f
-				duration = duration_converter(event['Duration'])
-				array.push({ time: time, note: note_name, duration: duration })
+				duration = event['Duration'].to_f
+				velocity = event['Velocity'].to_f/128
+				array.push({ time: time, note: note_name, duration: duration, velocity: velocity })
 			end
 		end
 		return array
