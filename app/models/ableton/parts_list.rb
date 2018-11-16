@@ -12,6 +12,10 @@ class Ableton::PartsList < Audio
 		script = "start_scene(#{self.identifier})"
 	end
 
+	def stop_all_parts
+		script = "stop_all_parts(#{self.identifier})"
+	end
+
 	def link_parts_to_track
 		@parts.each do |part|
 			@scripts.push("#{part.identifier}.track = #{self.identifier};")

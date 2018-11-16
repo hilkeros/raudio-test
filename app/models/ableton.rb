@@ -125,6 +125,7 @@ class Ableton
 	def build_interface(parts, tracks, scenes)
     buttons = []
     dials = []
+    stop_buttons = []
 
     scenes.each do |scene|
     	row = []
@@ -152,7 +153,19 @@ class Ableton
   			&nbsp; <span id='number_#{dial.identifier}'></span></td>"
   			dials.push(dial)
   		end
+  		grid << "</tr>"
   	end
+  	# stop all parts from track buttons
+  	if @instruments.present?
+  		grid << "<tr><td>stop</td>"
+  		@instruments.count.times do |i|
+  			stop_button = NxButton.new(tracks[i].stop_all_parts)
+  			grid << "<td><div id='#{stop_button.identifier}'></div></td>"
+  			stop_buttons.push(stop_button)
+  		end
+  		grid << "</tr>"
+  	end
+
   	# scene buttons
   	buttons.each_with_index do |row, index|
   		grid << "<tr><td>s#{index + 1}</td>"
@@ -164,7 +177,7 @@ class Ableton
   	grid << "</table>"
   	grid = grid.html_safe
 
-  	nexus = Nexus.new.render(*dials, *buttons.flatten)
+  	nexus = Nexus.new.render(*dials, *stop_buttons, *buttons.flatten)
   	return nexus, grid
 
 	end

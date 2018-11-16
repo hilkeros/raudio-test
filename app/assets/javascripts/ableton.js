@@ -14,6 +14,14 @@ function start_scene(scene) {
 	})
 }
 
+function stop_all_parts(track) {
+	track.forEach(function (this_part) {
+		this_part.stop('@1m');
+	})
+}
+
 function to_tone_values(events) {
-  return events.map(function(event) { return {time: event.time * Tone.Time('4n'), note: event.note, duration : event.duration} });
+  processed = events.map(function(event) { return {time: event.time * Tone.Time('4n'), 
+  	note: event.note, duration : event.duration * Tone.Time('4n'), velocity: event.velocity }});
+  return processed;
 }
