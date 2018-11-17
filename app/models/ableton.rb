@@ -130,10 +130,10 @@ class Ableton
     scenes.each do |scene|
     	row = []
     	scene.parts.each do |part|
-    		part_button = NxButton.new(part.start_in_session(part.track))
+    		part_button = NxToggle.new(part.start_in_session(part.track))
     		row.push(part_button)
     	end
-    	scene_button = NxButton.new(scene.start_scene)
+    	scene_button = NxToggle.new(scene.start_scene)
     	row.push(scene_button)
     	buttons.push(row)
     end
