@@ -1,6 +1,5 @@
 class Audio
 
-
 	def initialize(bpm: 120)
     @bpm = bpm
   end
@@ -12,6 +11,10 @@ class Audio
 
   def connect(destination)
   	@scripts << "#{identifier}.connect(#{destination.identifier});"
+  end
+
+  def send(effect)
+    @scripts << "var #{effect}Send#{identifier} = #{identifier}.send('#{effect}', -Infinity);"
   end
 
   def start(offset = nil )

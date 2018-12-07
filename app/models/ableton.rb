@@ -122,7 +122,7 @@ class Ableton
 		return array
 	end
 
-	def build_interface(parts, tracks, scenes)
+	def build_interface(parts, tracks, scenes, effects=[])
     buttons = []
     dials = []
     stop_buttons = []
@@ -154,7 +154,20 @@ class Ableton
   			dials.push(dial)
   		end
   		grid << "</tr>"
+  		grid << "</tr>"
   	end
+  	# effects
+  	effects.each do |effect|
+  		grid << "<tr><td>#{effect.class.name}</td>"
+  		@instruments.each do |instrument|
+  			dial = NxDial.new(effect.bus_name + 'Send' + instrument.identifier, 'gain', {'min': -100, 'max': 0, 'value': -100})
+				grid << "<td><span id='#{dial.identifier}'></span><br>
+  			&nbsp; <span id='number_#{dial.identifier}'></span></td>"
+  			dials.push(dial)
+  		end
+  		grid << "</tr>"
+  	end
+
   	# stop all parts from track buttons
   	if @instruments.present?
   		grid << "<tr><td>stop</td>"
