@@ -25,3 +25,27 @@ function to_tone_values(events) {
   	note: event.note, duration : event.duration * Tone.Time('4n'), velocity: event.velocity }});
   return processed;
 }
+
+function get_knobs() {
+	$('.getKnobs').submit( function (event){
+		volumes = [];
+		sends = [];
+		$('.volume').each(function() {
+			v = window[$(this).attr('id')].value;
+			volumes.push(v);
+		});
+		$('.send').each(function() {
+			v = window[$(this).attr('id')].value;
+			sends.push(v);
+		})
+		knobs = JSON.stringify({volumes: volumes, sends: sends})
+		$('<input />').attr('type', 'hidden')
+          .attr('name', "knobs")
+          .attr('value', knobs)
+          .appendTo($(this));
+	});
+}
+
+$( document ).ready(function() {
+	get_knobs();
+});

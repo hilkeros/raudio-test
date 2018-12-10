@@ -1,3 +1,16 @@
+<div id=mix-loader>
+	<%= render 'mixes/mix_loader', file: @ableton.file, name: 'No mix loaded', mix: nil %>
+</div>
+
+<div>
+	Save new mix:
+	<%= form_for @mix, html: {class: 'getKnobs', remote: true} do |f| %>
+		<%= f.text_field :name, placeholder: 'name' %>
+		<%= f.hidden_field :file, value: @ableton.file %>
+		<%= f.submit 'Save' %>
+	<% end %>
+</div>
+
 <%= @grid %>
 <%= @raudio %>
 <%= @nexus %>

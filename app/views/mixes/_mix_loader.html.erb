@@ -1,0 +1,12 @@
+Current mix: <strong><%= name %></strong>
+<% if mix.present? %>
+	<%= form_for mix, url: mix_path(mix), html: { method: :put, remote: true, class: 'getKnobs' } do |f| %>
+		<%= f.submit 'Update' %>
+	<% end %>
+<% end %>
+<br/>
+Load mix:
+<%= form_tag mix_path(1), remote: true, method: :get do %>
+	<%= select_tag :mix_id, options_for_select(Mix.where(file: file).map{|m| [m.name, m.id]}) %>
+	<%= submit_tag 'Load' %>
+<% end %>

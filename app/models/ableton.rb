@@ -150,7 +150,7 @@ class Ableton
   		@instruments.count.times do |i|
   			dial = NxDial.new(instruments[i], 'volume', {'min': -30, 'max': 6})
   			grid << "<td><span id='#{dial.identifier}'></span><br>
-  			&nbsp; <span id='number_#{dial.identifier}'></span></td>"
+  			&nbsp; <span id='number_#{dial.identifier}' class='volume'></span></td>"
   			dials.push(dial)
   		end
   		grid << "</tr>"
@@ -162,7 +162,7 @@ class Ableton
   		@instruments.each do |instrument|
   			dial = NxDial.new(effect.bus_name + 'Send' + instrument.identifier, 'gain', {'min': -100, 'max': 0, 'value': -100})
 				grid << "<td><span id='#{dial.identifier}'></span><br>
-  			&nbsp; <span id='number_#{dial.identifier}'></span></td>"
+  			&nbsp; <span id='number_#{dial.identifier}' class='send'></span></td>"
   			dials.push(dial)
   		end
   		grid << "</tr>"
