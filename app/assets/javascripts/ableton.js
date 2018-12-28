@@ -1,4 +1,7 @@
 function start_in_session(part, track) {
+	if (Tone.context.state !== 'running') {
+        Tone.context.resume();
+    }
 	track.forEach(function (this_part) {
 		if (this_part == part) {
 			this_part.start('@1m');
