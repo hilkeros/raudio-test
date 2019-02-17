@@ -1,0 +1,32 @@
+
+<div style="height: 30000px; width: 5000px">
+	<div style="height:500px; background: white">
+		<h1>Please Scroll</h1>
+		<p>Push the button to start the music (that might take some seconds). Scroll down to go to the next part of the arrangement. Scroll right and left to change the delay.</p>
+		<span id="<%= @start_scene_1.identifier %>"></span>
+		<%= @start_everything %>
+	</div>
+	<div style="height:1500px; background: blue">
+		<h1>part 2</h1>
+	</div>
+	<div><h1>part 3</h1>
+</div>
+
+<div style="display:none">
+<%= @grid %>
+</div>
+<%= @raudio %>
+<%= @nexus %>
+<%= @interaction %>
+
+<script>
+	$(document).ready(function(){
+		var knobs = <%= @mix.knobs.to_json.html_safe %>;
+		$('.volume').each(function(index) {
+					window[$(this).attr('id')].value = knobs['volumes'][index];
+		});
+		$('.send').each(function(index) {
+					window[$(this).attr('id')].value = knobs['sends'][index];
+		});
+	});
+</script>

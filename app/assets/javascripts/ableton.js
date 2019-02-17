@@ -1,6 +1,8 @@
 function start_in_session(part, track) {
 	if (Tone.context.state !== 'running') {
+        console.log('started part');
         Tone.context.resume();
+        console.log(Tone.context.state);
     }
 	track.forEach(function (this_part) {
 		if (this_part == part) {
@@ -12,6 +14,8 @@ function start_in_session(part, track) {
 }
 
 function start_scene(scene) {
+	console.log('started scene');
+	console.log(Tone.context.state);
 	scene.forEach(function (part) {
 		start_in_session(part, part.track); 
 	})

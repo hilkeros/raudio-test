@@ -5,7 +5,8 @@ class ScrollFaderX
 		@node = node.identifier
 		js_condition = 'window.pageXOffset >' + start_position.to_s
 		@scripts = "if(#{js_condition}) {
-		    	 #{@node}.#{parameter} = window.pageXOffset #{math};
+		    	 #{@node}.#{parameter}.value = window.pageXOffset #{math};
+		    	 console.log(#{@node}.#{parameter}.value)
 		    }"
 	end
 
