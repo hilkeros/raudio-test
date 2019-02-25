@@ -22,7 +22,17 @@ class Ableton::AbletonTrack < Ableton
 	end
 
 	def simpler
-		Ableton::Simpler.new(@track_xml)
+		unless @track_xml.css('DrumGroupDevice').present?
+			Ableton::Simpler.new(@track_xml)
+		end
+	end
+
+	def to_json
+		{
+			drum_rack: drum_rack.sample_mapping,
+			simpler: simpler.to_json,
+			events: clip_slots.map{|s| s.events}
+		}
 	end
 	
 end

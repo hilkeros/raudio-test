@@ -47,6 +47,10 @@ class Ableton
 		return tracks
 	end
 
+	def to_json
+		{tracks: self.midi_tracks.map{|t| t.to_json}}
+	end
+
 	def build_session
 		this_session = {}
 		midi_tracks.each_with_index do |track, index|

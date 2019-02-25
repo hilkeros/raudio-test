@@ -6,7 +6,16 @@ class MixesController < ApplicationController
 	end
 
 	def show
-		@mix = Mix.find(params[:mix_id])
+		if params[:mix_id].present?
+			@mix = Mix.find(params[:mix_id]) 
+		else
+			@mix = Mix.find(params[:id])
+		end
+
+		respond_to do |format|
+			format.js
+			format.json { render json: @mix.to_json}
+		end
 	end
 
 	def update
